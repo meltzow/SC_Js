@@ -1,4 +1,5 @@
-var Resource={
+
+var Resource: any={
     init:function(){
         for (var N=0;N<Game.playerNum;N++){
             Resource[N]={
@@ -118,3 +119,5 @@ var Resource={
         return Resource.paypal.call(this,cost);
     }
 };
+
+export default Resource;

@@ -1,5 +1,11 @@
+import Burst from "./Burst";
+import Game from "../GameRule/Game";
+import Gobj from "./Gobj";
+import Resource from "../GameRule/Resource";
+import Zerg from "./Zerg";
+import Multiplayer from "../GameRule/Multiplayer";
 /******* Define Protoss units *******/
-var Protoss={};
+var Protoss: any ={};
 Protoss.Probe=AttackableUnit.extends({
     constructorPlus:function(props){
         //Same action mapping
@@ -784,7 +790,7 @@ Protoss.Reaver=AttackableUnit.extends({
         upgrade:['UpgradeGroundArmor','UpgradePlasmaShields'],
         items:{
             '7':{name:'Scarab',condition:function(){
-                if (!Game.selectedUnit.scarabNum) $('button.attack').attr('disabled',true);
+                if (!Game.selectedUnit.scarabNum) ($('button.attack') as any).attr('disabled',true);
                 else $('button.attack').removeAttr('disabled');
                 return Game.selectedUnit.scarabNum<Game.selectedUnit.get('scarabCapacity');
             }}
@@ -1052,7 +1058,7 @@ Protoss.Carrier=AttackableUnit.extends({
         upgrade:['UpgradeAirWeapons','UpgradeAirArmor','UpgradePlasmaShields'],
         items:{
             '7':{name:'Interceptor',condition:function(){
-                if (!Game.selectedUnit.continuousAttack.count) $('button.attack').attr('disabled',true);
+                if (!Game.selectedUnit.continuousAttack.count) ($('button.attack') as any).attr('disabled',true);
                 else $('button.attack').removeAttr('disabled');
                 return Game.selectedUnit.continuousAttack.count<Game.selectedUnit.get('interceptorCapacity');
             }}
@@ -1208,3 +1214,5 @@ Protoss.Corsair=AttackableUnit.extends({
         }
     }
 });
+
+export default Protoss;

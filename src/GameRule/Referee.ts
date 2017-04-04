@@ -1,4 +1,8 @@
-var Referee={
+import Game from "./Game";
+import Resource from "./Resource";
+import _$ from "../Utils/gFrame";
+import Gobj from "../Characters/Gobj";
+var Referee: any={
     ourDetectedUnits:[],//Detected enemies
     enemyDetectedUnits:[],//Detected ours
     _pos:[[-1,0],[1,0],[0,-1],[0,1]],//Collision avoid
@@ -415,3 +419,5 @@ var Referee={
         }
     }
 };
+
+export default Referee;

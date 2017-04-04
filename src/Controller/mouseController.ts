@@ -1,4 +1,11 @@
-var mouseController={
+import Map from "../Characters/Map";
+import Game from "../GameRule/Game";
+import Gobj from "../Characters/Gobj";
+import Burst from "../Characters/Burst";
+import Referee from "../GameRule/Referee";
+import Multiplayer from "../GameRule/Multiplayer";
+
+var mouseController:any={
     down:false,
     drag:false,
     startPoint:{x:0,y:0},
@@ -241,7 +248,7 @@ var mouseController={
                     mouseController.drag=false;
                 }
             };
-            mouseController.mobileScreen=new Hammer(window);
+            mouseController.mobileScreen= new Hammer(window);
             mouseController.canvasScreen=new Hammer($('#fogCanvas')[0]);
             mouseController.canvasScreen.on('tap',function(event){
                 event.preventDefault();
@@ -289,3 +296,5 @@ var mouseController={
         });
     }
 };
+
+export default mouseController;

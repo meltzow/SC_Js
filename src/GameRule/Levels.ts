@@ -1,4 +1,6 @@
-var Levels=[
+import Map from './Characters/Map';
+
+var Levels: any =[
     {
         level:1,
         load:function(){
@@ -942,3 +944,5 @@ var Levels=[
         }
     }
 ];
+
+export default Levels;

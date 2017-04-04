@@ -1,5 +1,10 @@
+import Game from "../GameRule/Game";
+import Resource from "../GameRule/Resource";
+import Burst from "./Burst";
+import Gobj from "./Gobj";
+import Multiplayer from "../GameRule/Multiplayer";
 /******* Define Zerg units *******/
-var Zerg={};
+var Zerg: any={};
 Zerg.Drone=AttackableUnit.extends({
     constructorPlus:function(props){
         this.sound.burrow=new Audio(Game.CDN+'bgm/Zerg.burrow.wav');
@@ -1643,3 +1648,5 @@ Zerg.Larva=Unit.extends({
         }
     }
 });
+
+export default Zerg;

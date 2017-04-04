@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jquery": "^1.11.2"
   },
   "devDependencies": {
     "@types/es6-shim": "^0.31.32",

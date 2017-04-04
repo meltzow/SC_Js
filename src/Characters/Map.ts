@@ -1,4 +1,8 @@
-var Map={
+import Burst from './Burst'
+import Game from "../GameRule/Game";
+import _$ from "../Utils/gFrame";
+
+var Map: any ={
     currentMap:'Switchback',//By default
     ready:false,
     offsetX:0,
@@ -11,7 +15,7 @@ var Map={
     fogUnits:[],//Units need to draw fog on screen
     allUnits:[],//Units need to draw fog on minimap
     batchSize:0,//Draw fog by each batch
-    miniCxt:$('canvas[name="mini_map"]')[0].getContext('2d'),
+    miniCxt: ($('canvas[name="mini_map"]')[0] as any).getContext('2d'),
     fogCanvas:document.createElement('canvas'),
     shadowCanvas:document.createElement('canvas'),//Pre-render for fog shadow
     insideStroke:{
@@ -228,3 +232,5 @@ var Map={
         Map.needRefresh=true;//For synchronize
     }
 };
+
+export default Map;

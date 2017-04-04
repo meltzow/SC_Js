@@ -1,4 +1,17 @@
-var Game={
+import Gobj from '../Characters/Gobj'
+import * as $ from 'jquery';
+import Levels from "./Levels";
+import Protoss from "../Characters/Protoss";
+import Resource from "./Resource";
+import Zerg from "../Characters/Zerg";
+import _$ from "../Utils/gFrame";
+import Map from "../Characters/Map";
+import Burst from "../Characters/Burst";
+import Referee from "./Referee";
+import mouseController from "../Controller/mouseController";
+import Multiplayer from "./Multiplayer";
+
+var Game: any ={
     //Global variables
     HBOUND:innerWidth,//$('body')[0].scrollWidth
     VBOUND:innerHeight,//$('body')[0].scrollHeight
@@ -12,10 +25,10 @@ var Game={
     playerNum:2,//By default
     teams:{},
     multiplayer:false,//By default
-    cxt:$('#middleCanvas')[0].getContext('2d'),
-    frontCxt:$('#frontCanvas')[0].getContext('2d'),
-    backCxt:$('#backCanvas')[0].getContext('2d'),
-    fogCxt:$('#fogCanvas')[0].getContext('2d'),
+    cxt:( $('#middleCanvas')[0] as any).getContext('2d'),
+    frontCxt:($('#frontCanvas')[0]as any).getContext('2d'),
+    backCxt:($('#backCanvas')[0]as any).getContext('2d'),
+    fogCxt:($('#fogCanvas')[0]as any).getContext('2d'),
     _timer:-1,
     _frameInterval:100,
     mainTick:0,
@@ -461,10 +474,10 @@ var Game={
             }
             //Show selected unit HP,SP and MP
             $('div.infoLeft span._Health')[0].style.color=Game.selectedUnit.lifeStatus();
-            $('div.infoLeft span.life')[0].innerHTML=Game.selectedUnit.life>>0;
+            $('div.infoLeft span.life')[0].innerHTML=String(Game.selectedUnit.life>>0);
             $('div.infoLeft span.HP')[0].innerHTML=Game.selectedUnit.get('HP');
             if (Game.selectedUnit.SP) {
-                $('div.infoLeft span.shield')[0].innerHTML=Game.selectedUnit.shield>>0;
+                $('div.infoLeft span.shield')[0].innerHTML= String(Game.selectedUnit.shield>>0);
                 $('div.infoLeft span.SP')[0].innerHTML=Game.selectedUnit.get('SP');
                 $('div.infoLeft span._Shield').show();
             }
@@ -472,7 +485,7 @@ var Game={
                 $('div.infoLeft span._Shield').hide();
             }
             if (Game.selectedUnit.MP) {
-                $('div.infoLeft span.magic')[0].innerHTML=Game.selectedUnit.magic>>0;
+                $('div.infoLeft span.magic')[0].innerHTML=String(Game.selectedUnit.magic>>0);
                 $('div.infoLeft span.MP')[0].innerHTML=Game.selectedUnit.get('MP');
                 $('div.infoLeft span._Magic').show();
             }
@@ -772,12 +785,12 @@ var Game={
             //Update selected unit life,shield and magic
             var lifeRatio=Game.selectedUnit.life/Game.selectedUnit.get('HP');
             $('div.infoLeft span._Health')[0].style.color=((lifeRatio>0.7)?"green":(lifeRatio>0.3)?"yellow":"red");
-            $('div.infoLeft span.life')[0].innerHTML=Game.selectedUnit.life>>0;
+            $('div.infoLeft span.life')[0].innerHTML=String(Game.selectedUnit.life>>0);
             if (Game.selectedUnit.SP) {
-                $('div.infoLeft span.shield')[0].innerHTML=Game.selectedUnit.shield>>0;
+                $('div.infoLeft span.shield')[0].innerHTML=String(Game.selectedUnit.shield>>0);
             }
             if (Game.selectedUnit.MP) {
-                $('div.infoLeft span.magic')[0].innerHTML=Game.selectedUnit.magic>>0;
+                $('div.infoLeft span.magic')[0].innerHTML=String(Game.selectedUnit.magic>>0);
             }
             //Update selected unit kill
             if (Game.selectedUnit.kill!=null){
@@ -1189,3 +1202,5 @@ var Game={
         }
     }
 };
+
+export default Game;

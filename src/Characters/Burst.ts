@@ -1,5 +1,10 @@
+import Gobj from './Gobj';
+import Game from "../GameRule/Game";
+import Map from "./Map";
+
+
 //One animation period which only play for a while and die
-var Burst=Gobj.extends({
+ var Burst=Gobj.extends({
     constructorPlus:function(props){
         //Override if has props.scale
         if (props.scale) this.scale=props.scale;
@@ -207,7 +212,7 @@ Burst.PurpleCloudSpread=Burst.extends({
             if (chara.buffer.PurpleCloud>0) chara.buffer.PurpleCloud++;
             else chara.buffer.PurpleCloud=1;
             //Decrease defense and slow down attack rate
-            var bufferObj={
+            var bufferObj: any ={
                 armor:chara.get('armor')-1
             };
             if (chara.plasma!=null) bufferObj.plasma=chara.get('plasma')-1;
@@ -1524,3 +1529,5 @@ Burst.KakaruDeath=Burst.extends({
         }
     }
 });
+
+export default Burst;

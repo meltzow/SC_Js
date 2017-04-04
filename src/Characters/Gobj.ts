@@ -1,5 +1,11 @@
+import * as _$ from 'jquery';
+import Burst from './Burst'
+import Map from './Map'
+import Game from "../GameRule/Game";
+
+
 //Gobj is original object used in StarCraft
-var Gobj=function(props){
+var Gobj : any = function(props){
     this.x=props.x;
     this.y=props.y;
     if (props.target instanceof Gobj){
@@ -219,7 +225,7 @@ Gobj.prototype.evolveTo=function(props){
     //Birth function
     var bornAt=function(chara){
         var prop={target:chara,team:team};
-        if (mixin) _$.mixin(prop,mixin);
+        if (mixin) (_$ as any).mixin(prop,mixin);
         newTypeChara=new charaType(prop);
         if (rallyPoint) newTypeChara.destination=rallyPoint;
         //Fix cannot select egg issue
@@ -262,3 +268,5 @@ Gobj.prototype.evolveTo=function(props){
 };
 //This buffer makes invisible units visible
 Gobj.detectorBuffer=[];
+
+export default Gobj;

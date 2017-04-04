@@ -1,7 +1,7 @@
 //gFrame namespace: DOM selector function
-var _$=function(selector){
+var _$ : any =function(selector){
     var selectors=selector.trim().split(' ');
-    var result=document;//Overall
+    var result: any =document;//Overall
     for (var N=0;N<selectors.length;N++){
         var curSelector=selectors[N];
         var filter,filterIndex=curSelector.indexOf('[');
@@ -447,3 +447,5 @@ _$.hypot=function(vector){
     });
     return Math.pow(result,0.5);
 };
+
+export default _$;

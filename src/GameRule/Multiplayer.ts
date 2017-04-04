@@ -1,4 +1,7 @@
-var Multiplayer={
+import Game from "./Game";
+import mouseController from "../Controller/mouseController";
+import Resource from "./Resource";
+var Multiplayer: any ={
     ON:false,//by default
     webSocket:null,
     cmds:[],
@@ -400,3 +403,5 @@ var Multiplayer={
         });
     }
 };
+
+export default Multiplayer;
