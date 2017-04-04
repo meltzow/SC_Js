@@ -270,4 +270,4 @@ Gobj.prototype.evolveTo=function(props){
 //This buffer makes invisible units visible
 Gobj.detectorBuffer=[];
 
-export default Gobj;
+export default Gobj = new Gobj();

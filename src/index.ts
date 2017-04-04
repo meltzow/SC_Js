@@ -1,8 +1,9 @@
 import * as $ from 'jquery';
 import Game from './GameRule/Game'
 
-import './Utils/gFrame';
+/*import './Utils/gFrame';
 import './Utils/sourceLoader';
+
 import './Characters/Gobj';
 
 import './Characters/Burst';
@@ -27,7 +28,7 @@ import './GameRule/Levels';
 import './GameRule/Cheat';
 import './Controller/mouseController';
 import './Controller/keyController';
-
+*/
 //########## AutoStart1 ##########//
 $(function () {
     Game.init();

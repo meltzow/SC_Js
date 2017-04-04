@@ -8,6 +8,9 @@
     "removeComments": false,
     "noImplicitAny": false,
     "typeRoots": ["node_modules/@types/"],
+    "alwaysStrict": true,
+    "listFiles": true,
+    "pretty": true,
     "types": [
       "node",
       "jasmine"

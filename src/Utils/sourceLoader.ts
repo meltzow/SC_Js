@@ -1,3 +1,4 @@
+import _$ from "./gFrame";
 var sourceLoader={
     sources:{},
     sourceNum:0,
@@ -52,3 +53,5 @@ var sourceLoader={
         }
     }
 };
+
+export default sourceLoader;

@@ -19,6 +19,7 @@ import Unit from "../Characters/Units";
 import keyController from "../Controller/keyController";
 import Bullets from "../Characters/Bullets";
 import Button from "../Characters/Button";
+import sourceLoader from "../Utils/sourceLoader";
 
 var Game: any ={
     //Global variables
