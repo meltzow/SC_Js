@@ -5,6 +5,7 @@ import Zerg from "../Characters/Zerg";
 import Terran from "../Characters/Terran";
 import Protoss from "../Characters/Protoss";
 import Hero from "../Characters/Hero";
+import Referee from "./Referee";
 var Multiplayer: any ={
     ON:false,//by default
     webSocket:null,
