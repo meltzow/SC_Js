@@ -1,5 +1,10 @@
+import Burst from "./Burst";
+import Resource from "../GameRule/Resource";
+import Game from "../GameRule/Game";
+import Gobj from "./Gobj";
+import Zerg from "./Zerg";
 /******* Define Terran units *******/
-var Terran={};
+var Terran: any ={};
 Terran.SCV=AttackableUnit.extends({
     constructorPlus:function(props){
         //Same action mapping
@@ -1095,3 +1100,5 @@ Terran.Civilian=Unit.extends({
         }
     }
 });
+
+export default Terran;

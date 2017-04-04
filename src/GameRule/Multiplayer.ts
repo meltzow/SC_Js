@@ -1,6 +1,10 @@
 import Game from "./Game";
 import mouseController from "../Controller/mouseController";
 import Resource from "./Resource";
+import Zerg from "../Characters/Zerg";
+import Terran from "../Characters/Terran";
+import Protoss from "../Characters/Protoss";
+import Hero from "../Characters/Hero";
 var Multiplayer: any ={
     ON:false,//by default
     webSocket:null,

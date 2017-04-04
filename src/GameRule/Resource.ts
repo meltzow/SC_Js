@@ -1,4 +1,8 @@
 
+import Game from "./Game";
+import Protoss from "../Characters/Protoss";
+import Terran from "../Characters/Terran";
+import Zerg from "../Characters/Zerg";
 var Resource: any={
     init:function(){
         for (var N=0;N<Game.playerNum;N++){

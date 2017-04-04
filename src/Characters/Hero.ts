@@ -1,5 +1,8 @@
+import Burst from "./Burst";
+import Gobj from "./Gobj";
+import Zerg from "./Zerg";
 /******* Define Hero units *******/
-var Hero={};
+var Hero: any={};
 Hero.HeroCruiser=AttackableUnit.extends({
     constructorPlus:function(props){
         //Same action mapping
@@ -445,3 +448,5 @@ Hero.DevilHunter=AttackableUnit.extends({
         }
     }
 });
+
+export default Hero;

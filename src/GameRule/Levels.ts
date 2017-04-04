@@ -1,4 +1,15 @@
-import Map from './Characters/Map';
+import Game from "./Game";
+import Terran from "../Characters/Terran";
+import Zerg from "../Characters/Zerg";
+import Protoss from "../Characters/Protoss";
+import Neutral from "../Characters/Neutral";
+import Hero from "../Characters/Hero";
+import Multiplayer from "./Multiplayer";
+import Referee from "./Referee";
+import _$ from "../Utils/gFrame";
+import Gobj from "../Characters/Gobj";
+import Map from "../Characters/Map";
+import Resource from "./Resource";
 
 var Levels: any =[
     {
@@ -931,7 +942,7 @@ var Levels: any =[
                 Game.endTick=lastReplay.end;
                 Game.commandTimeout(function(){
                     Game.stopAnimation();
-                    $('div.panel_Control button').attr('disabled',true);
+                    ($('div.panel_Control button') as any).attr('disabled',true);
                     Game.showMessage('Replay ended...',10000);
                 },100*Game.endTick);
             }

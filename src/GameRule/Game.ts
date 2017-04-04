@@ -815,7 +815,7 @@ var Game: any ={
             $('div.upgrading div[name="icon"]')[0].className=processing.name;
             //var percent=((new Date().getTime()-processing.startTime)/(processing.time)+0.5)>>0;
             var percent=((Game.mainTick-processing.startTime)*100/(processing.time)+0.5)>>0;
-            $('div.upgrading div[name="processing"] span')[0].innerHTML=percent;
+            $('div.upgrading div[name="processing"] span')[0].innerHTML= String(percent);
             $('div.upgrading div[name="processing"] div.processedBar')[0].style.width=percent+'%';
             $('div.upgrading').attr('title',processing.name).show();
         }
@@ -824,7 +824,7 @@ var Game: any ={
             if (Game.replayFlag && Game.endTick>0){
                 $('div.upgrading div[name="icon"]')[0].className='Replay';
                 var percent=(Game.mainTick*100/(Game.endTick)+0.5)>>0;
-                $('div.upgrading div[name="processing"] span')[0].innerHTML=percent;
+                $('div.upgrading div[name="processing"] span')[0].innerHTML=String(percent);
                 $('div.upgrading div[name="processing"] div.processedBar')[0].style.width=percent+'%';
                 $('div.upgrading').attr('title','Replay Progress').show();
                 if (!(Game.selectedUnit instanceof Gobj)){

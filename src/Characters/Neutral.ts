@@ -1,5 +1,6 @@
+import Burst from "./Burst";
 /******* Define Neutral units *******/
-var Neutral={};
+var Neutral: any={};
 Neutral.Ragnasaur=Unit.extends({
     constructorPlus:function(props){
         //Same action mapping
@@ -324,3 +325,5 @@ Neutral.Kakaru=Unit.extends({
         }
     }
 });
+
+export default Neutral;
