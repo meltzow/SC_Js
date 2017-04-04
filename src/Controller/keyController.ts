@@ -1,6 +1,7 @@
 import Cheat from "../GameRule/Cheat";
 import Game from "../GameRule/Game";
 import Map from "../Characters/Map";
+import Button from "../Characters/Button";
 
 var keyController: any ={
 	shift:false,

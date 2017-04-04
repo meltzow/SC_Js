@@ -1,4 +1,20 @@
-var Button={
+import Multiplayer from "../GameRule/Multiplayer";
+import Magic from "./Magic";
+import Burst from "./Burst";
+import mouseController from "../Controller/mouseController";
+import Game from "../GameRule/Game";
+import Resource from "../GameRule/Resource";
+import Unit from "./Units";
+import Building from "./Building";
+import Terran from "./Terran";
+import Protoss from "./Protoss";
+import Zerg from "./Zerg";
+import Gobj from "./Gobj";
+import Map from "./Map";
+import Referee from "../GameRule/Referee";
+import Upgrade from "./Upgrade";
+
+var Button: any ={
     callback:null,
     /***************Functions***************/
     reset:function(){
@@ -44,7 +60,7 @@ var Button={
                 if (chara.items[N]!=null) {
                     $('button[num="'+N+'"]').off('click').attr('class',chara.items[N].name).show();
                     if (chara.items[N].condition && !(chara.items[N].condition()))
-                        $('button[num="'+N+'"]').attr('disabled',true);
+                        ($('button[num="'+N+'"]')as any).attr('disabled',true);
                     else $('button[num="'+N+'"]').removeAttr('disabled');
                     //Exceptions: need mark numbers on button
                     switch (chara.items[N].name){
@@ -327,7 +343,7 @@ var Button={
         });
     },
     equipButtonsForReplay:function(){
-        $('button[num="1"]').attr('class','Play').attr('disabled',true).show();
+        ($('button[num="1"]').attr('class','Play')as any).attr('disabled',true).show();
         $('button[num="2"]').attr('class','Pause').show();
         $('button[num="4"]').attr('class','SpeedUp').show();
         $('button[num="5"]').attr('class','SlowDown').show();
@@ -667,13 +683,13 @@ var Button={
     //Replay relative
     playHandler:function(){
         Game.startAnimation();
-        $('button.Play').attr('disabled',true);
-        $('button.Pause').attr('disabled',false);
+        ($('button.Play')as any).attr('disabled',true);
+        ($('button.Pause')as any).attr('disabled',false);
     },
     pauseHandler:function(){
         Game.stopAnimation();
-        $('button.Pause').attr('disabled',true);
-        $('button.Play').attr('disabled',false);
+        ($('button.Pause')as any).attr('disabled',true);
+        ($('button.Play')as any).attr('disabled',false);
     },
     speedUpHandler:function(){
         if (Game.replayFlag){
@@ -681,13 +697,13 @@ var Button={
             if (Game._frameInterval>25) {
                 Game._frameInterval/=2;
                 //Cannot speed up any more
-                if (Game._frameInterval<=25) $('button.SpeedUp').attr('disabled',true);
+                if (Game._frameInterval<=25) ($('button.SpeedUp')as any).attr('disabled',true);
                 //Need play speed refresh after speed up
                 Game.stopAnimation();
                 Button.playHandler();
             }
             //Enable SlowDown button
-            $('button.SlowDown').attr('disabled',false);
+            ($('button.SlowDown')as any).attr('disabled',false);
         }
     },
     slowDownHandler:function(){
@@ -696,13 +712,13 @@ var Button={
             if (Game._frameInterval<400)  {
                 Game._frameInterval*=2;
                 //Cannot slow down any more
-                if (Game._frameInterval>=400) $('button.SlowDown').attr('disabled',true);
+                if (Game._frameInterval>=400) ($('button.SlowDown')as any).attr('disabled',true);
                 //Need play speed refresh after slow down
                 Game.stopAnimation();
                 Button.playHandler();
             }
             //Enable SpeedUp button
-            $('button.SpeedUp').attr('disabled',false);
+            ( $('button.SpeedUp')as any).attr('disabled',false);
         }
     },
     //Execute callback
@@ -758,3 +774,5 @@ var Button={
         Button.callback=null;
     }
 };
+
+export default Button;

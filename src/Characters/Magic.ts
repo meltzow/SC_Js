@@ -4,8 +4,13 @@ import Animation from "./Animation";
 import Game from "../GameRule/Game";
 import Resource from "../GameRule/Resource";
 import Building from "./Building";
-import Unit from "./Units";
+import Unit, {AttackableUnit} from "./Units";
 import Bullets from "./Bullets";
+import Button from "./Button";
+import Burst from "./Burst";
+import Zerg from "./Zerg";
+import _$ from "../Utils/gFrame";
+import Neutral from "./Neutral";
 var Magic: any ={
     //Zerg
     Burrow:{
@@ -25,7 +30,7 @@ var Magic: any ={
                 items:{'1':undefined,'2':undefined,'3':undefined,'4':undefined,'5':undefined,
                     '6':undefined,'7':undefined,'8':undefined,'9':{name:'Unburrow'}}
             };
-            if (this.attack) bufferObj.attack=function(){};
+            if (this.attack) (bufferObj as any).attack=function(){};
             //Lurker has same behavior as attackable building
             if (this.name=="Lurker") {
                 var mixin=$.extend({},Building.Attackable.prototypePlus);
@@ -627,8 +632,8 @@ var Magic: any ={
             }
             //Change icon
             var items=_$.clone(this.items);
-            for (var N in items){
-                if (items[N].name=="Cloak") items[N].name="Decloak";
+            for (var n in items){
+                if (items[n].name=="Cloak") items[n].name="Decloak";
             }
             this.items=items;
             //Apply callback

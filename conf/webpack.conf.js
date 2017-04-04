@@ -46,11 +46,17 @@ module.exports = {
     ]
   },
   plugins: [
+   new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     FailPlugin,
     new HtmlWebpackPlugin({
-      template: conf.path.src('index.html')
+      template: conf.path.src('index.html'),
+      inject: 'head' 
     }),
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
@@ -83,5 +89,5 @@ module.exports = {
       '.ts'
     ]
   },
-  entry: `./${conf.path.src('index')}`
+  entry: ['jquery',`./${conf.path.src('index')}`]
 };

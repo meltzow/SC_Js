@@ -4,6 +4,9 @@ import Gobj from "../Characters/Gobj";
 import Burst from "../Characters/Burst";
 import Referee from "../GameRule/Referee";
 import Multiplayer from "../GameRule/Multiplayer";
+import Button from "../Characters/Button";
+import keyController from "./keyController";
+import Unit from "../Characters/Units";
 var Hammer = require('jquery')
 
 var mouseController:any={

@@ -7,6 +7,12 @@ import Protoss from "../Characters/Protoss";
 import Hero from "../Characters/Hero";
 import Referee from "./Referee";
 import Cheat from "./Cheat";
+import Unit from "../Characters/Units";
+import Building from "../Characters/Building";
+import Magic from "../Characters/Magic";
+import Button from "../Characters/Button";
+import keyController from "../Controller/keyController";
+import Upgrade from "../Characters/Upgrade";
 var Multiplayer: any ={
     ON:false,//by default
     webSocket:null,

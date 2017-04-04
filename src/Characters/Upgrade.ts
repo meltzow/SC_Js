@@ -1,3 +1,11 @@
+import Terran from "./Terran";
+import Game from "../GameRule/Game";
+import Building from "./Building";
+import Magic from "./Magic";
+import Zerg from "./Zerg";
+import Protoss from "./Protoss";
+import Hero from "./Hero";
+import Bullets from "./Bullets";
 var Upgrade={
     //Terran
     UpgradeInfantryWeapons:{
@@ -1128,3 +1136,4 @@ var Upgrade={
         }
     }
 };
+export default Upgrade;

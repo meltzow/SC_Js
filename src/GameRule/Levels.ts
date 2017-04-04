@@ -11,6 +11,12 @@ import Gobj from "../Characters/Gobj";
 import Map from "../Characters/Map";
 import Resource from "./Resource";
 import Cheat from "./Cheat";
+import Building from "../Characters/Building";
+import Upgrade from "../Characters/Upgrade";
+import Unit from "../Characters/Units";
+import Magic from "../Characters/Magic";
+import Bullets from "../Characters/Bullets";
+import Button from "../Characters/Button";
 
 var Levels: any =[
     {

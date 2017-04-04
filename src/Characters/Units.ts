@@ -4,6 +4,7 @@ import Game from "../GameRule/Game";
 import _$ from "../Utils/gFrame";
 import Referee from "../GameRule/Referee";
 import Building from "./Building";
+import Map from "./Map";
 
 var Unit=Gobj.extends({
     constructorPlus:function(props){

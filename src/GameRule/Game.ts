@@ -13,6 +13,12 @@ import Multiplayer from "./Multiplayer";
 import Terran from "../Characters/Terran";
 import Neutral from "../Characters/Neutral";
 import Hero from "../Characters/Hero";
+import Building from "../Characters/Building";
+import Upgrade from "../Characters/Upgrade";
+import Unit from "../Characters/Units";
+import keyController from "../Controller/keyController";
+import Bullets from "../Characters/Bullets";
+import Button from "../Characters/Button";
 
 var Game: any ={
     //Global variables

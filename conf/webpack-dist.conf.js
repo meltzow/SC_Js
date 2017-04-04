@@ -49,7 +49,8 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     FailPlugin,
     new HtmlWebpackPlugin({
-      template: conf.path.src('index.html')
+      template: conf.path.src('index.html'),
+      inject: 'head' 
     }),
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,

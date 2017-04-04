@@ -4,6 +4,11 @@ import Game from "../GameRule/Game";
 import Gobj from "./Gobj";
 import Zerg from "./Zerg";
 import Cheat from "../GameRule/Cheat";
+import Building from "./Building";
+import AttackableUnit from "./Units";
+import Unit from "./Units";
+import Button from "./Button";
+import Magic from "./Magic";
 /******* Define Terran units *******/
 var Terran: any ={};
 Terran.SCV=AttackableUnit.extends({

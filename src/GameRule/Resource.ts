@@ -6,6 +6,9 @@ import Zerg from "../Characters/Zerg";
 import Referee from "./Referee";
 import _$ from "../Utils/gFrame";
 import Cheat from "./Cheat";
+import Building from "../Characters/Building";
+import Magic from "../Characters/Magic";
+import Upgrade from "../Characters/Upgrade";
 var Resource: any={
     init:function(){
         for (var N=0;N<Game.playerNum;N++){

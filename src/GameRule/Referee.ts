@@ -6,6 +6,8 @@ import Map from "../Characters/Map";
 import Zerg from "../Characters/Zerg";
 import Protoss from "../Characters/Protoss";
 import Animation from "../Characters/Animation";
+import Building from "../Characters/Building";
+import Unit from "../Characters/Units";
 var Referee: any={
     ourDetectedUnits:[],//Detected enemies
     enemyDetectedUnits:[],//Detected ours

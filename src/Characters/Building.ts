@@ -8,6 +8,7 @@ import Cheat from "../GameRule/Cheat";
 import _$ from "../Utils/gFrame";
 import AttackableUnit from "./Units";
 import Unit from "./Units";
+import Button from "./Button";
 
 var Building=Gobj.extends({
     constructorPlus:function(props){

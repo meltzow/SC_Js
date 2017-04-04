@@ -7,6 +7,7 @@ import Building from "./Building";
 import Burst from "./Burst";
 import Game from "../GameRule/Game";
 import Unit from "./Units";
+import Button from "./Button";
 var Bullets=Gobj.extends({
     constructorPlus:function(props){
         this.owner=props.from;

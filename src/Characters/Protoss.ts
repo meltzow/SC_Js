@@ -5,6 +5,10 @@ import Resource from "../GameRule/Resource";
 import Zerg from "./Zerg";
 import Multiplayer from "../GameRule/Multiplayer";
 import Cheat from "../GameRule/Cheat";
+import Unit, {AttackableUnit} from "./Units";
+import Building from "./Building";
+import Button from "./Button";
+import Magic from "./Magic";
 /******* Define Protoss units *******/
 var Protoss: any ={};
 Protoss.Probe=AttackableUnit.extends({

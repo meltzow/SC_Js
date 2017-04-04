@@ -4,7 +4,11 @@ import Burst from "./Burst";
 import Gobj from "./Gobj";
 import Multiplayer from "../GameRule/Multiplayer";
 import Cheat from "../GameRule/Cheat";
-import {AttackableUnit} from "./Units";
+import AttackableUnit from "./Units";
+import Building from "./Building";
+import Unit from "./Units";
+import Magic from "./Magic";
+import Button from "./Button";
 /******* Define Zerg units *******/
 var Zerg: any={};
 Zerg.Drone=AttackableUnit.extends({

@@ -4,6 +4,10 @@ import Hero from "../Characters/Hero";
 import Resource from "./Resource";
 import Multiplayer from "./Multiplayer";
 import Map from "../Characters/Map";
+import keyController from "../Controller/keyController";
+import Unit from "../Characters/Units";
+import Building from "../Characters/Building";
+import Upgrade from "../Characters/Upgrade";
 
 var Cheat: any ={
     isShown:false,
