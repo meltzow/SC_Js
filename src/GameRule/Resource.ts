@@ -5,6 +5,7 @@ import Terran from "../Characters/Terran";
 import Zerg from "../Characters/Zerg";
 import Referee from "./Referee";
 import _$ from "../Utils/gFrame";
+import Cheat from "./Cheat";
 var Resource: any={
     init:function(){
         for (var N=0;N<Game.playerNum;N++){

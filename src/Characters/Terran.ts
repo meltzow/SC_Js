@@ -3,6 +3,7 @@ import Resource from "../GameRule/Resource";
 import Game from "../GameRule/Game";
 import Gobj from "./Gobj";
 import Zerg from "./Zerg";
+import Cheat from "../GameRule/Cheat";
 /******* Define Terran units *******/
 var Terran: any ={};
 Terran.SCV=AttackableUnit.extends({

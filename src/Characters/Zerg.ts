@@ -3,6 +3,8 @@ import Resource from "../GameRule/Resource";
 import Burst from "./Burst";
 import Gobj from "./Gobj";
 import Multiplayer from "../GameRule/Multiplayer";
+import Cheat from "../GameRule/Cheat";
+import {AttackableUnit} from "./Units";
 /******* Define Zerg units *******/
 var Zerg: any={};
 Zerg.Drone=AttackableUnit.extends({

@@ -1,4 +1,12 @@
-var Magic={
+import Cheat from "../GameRule/Cheat";
+import Gobj from "./Gobj";
+import Animation from "./Animation";
+import Game from "../GameRule/Game";
+import Resource from "../GameRule/Resource";
+import Building from "./Building";
+import Unit from "./Units";
+import Bullets from "./Bullets";
+var Magic: any ={
     //Zerg
     Burrow:{
         name:"Burrow",
@@ -1688,3 +1696,5 @@ var Magic={
         }
     }
 };
+
+export default Magic;

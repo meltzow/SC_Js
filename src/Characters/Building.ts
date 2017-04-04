@@ -1,3 +1,14 @@
+import Gobj from "./Gobj";
+import Map from "./Map";
+import Game from "../GameRule/Game";
+import Burst from "./Burst";
+import Referee from "../GameRule/Referee";
+import Resource from "../GameRule/Resource";
+import Cheat from "../GameRule/Cheat";
+import _$ from "../Utils/gFrame";
+import AttackableUnit from "./Units";
+import Unit from "./Units";
+
 var Building=Gobj.extends({
     constructorPlus:function(props){
         //Add id for building
@@ -3114,3 +3125,5 @@ Building.ProtossBuilding.WrapRift=Building.ProtossBuilding.extends({
         sight: 350
     }
 });
+
+export default Building;

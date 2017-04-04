@@ -2,6 +2,7 @@ import * as _$ from 'jquery';
 import Burst from './Burst'
 import Map from './Map'
 import Game from "../GameRule/Game";
+import Building from "./Building";
 
 
 //Gobj is original object used in StarCraft

@@ -1,3 +1,12 @@
+import Gobj from "./Gobj";
+import Zerg from "./Zerg";
+import Terran from "./Terran";
+import Protoss from "./Protoss";
+import Hero from "./Hero";
+import Building from "./Building";
+import Burst from "./Burst";
+import Game from "../GameRule/Game";
+import Unit from "./Units";
 var Bullets=Gobj.extends({
     constructorPlus:function(props){
         this.owner=props.from;
@@ -774,6 +783,8 @@ Bullets.DevilBall=Bullets.extends({
         die:Bullets.Darts.prototype.die
     }
 });
+
+export default Bullets;
 //Mapping for apply, need to move it into Units.js
 Zerg.Drone.prototype.Bullet=Bullets.Spooge;
 Zerg.Hydralisk.prototype.Bullet=Bullets.Spooge;

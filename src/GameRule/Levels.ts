@@ -10,6 +10,7 @@ import _$ from "../Utils/gFrame";
 import Gobj from "../Characters/Gobj";
 import Map from "../Characters/Map";
 import Resource from "./Resource";
+import Cheat from "./Cheat";
 
 var Levels: any =[
     {
@@ -570,7 +571,7 @@ var Levels: any =[
                 return Pyramid.status=='dead';//Closure
             };
             //Enemy coming
-            var offsets=[{x:1536,y:36},{x:1536,y:3036},{x:36,y:1536},{x:3036,y:1536},
+            var offsets:any=[{x:1536,y:36},{x:1536,y:3036},{x:36,y:1536},{x:3036,y:1536},
                 {x:486,y:486},{x:486,y:2586},{x:2586,y:486},{x:2586,y:2586}];
             var num=0, wave=1;
             var interval=20000;//20 seconds per wave
@@ -686,7 +687,7 @@ var Levels: any =[
             },0);
             //Enemy coming
             Levels.enemyWave=function(){
-                var pos={team:1};
+                var pos: any ={team:1};
                 _$.traverse([Neutral,Zerg,Terran,Protoss],function(enemyType){
                     pos.x=(Game.getNextRandom()*mapSize.width)>>0;
                     pos.y=(Game.getNextRandom()*mapSize.height)>>0;
@@ -919,7 +920,7 @@ var Levels: any =[
         label:'Replay',
         load:function(){
             //Load replay
-            var lastReplay=localStorage.getItem('lastReplay');
+            var lastReplay: any=localStorage.getItem('lastReplay');
             if (lastReplay!=null){
                 Game.replayFlag=true;
                 //Map.fogFlag=false;

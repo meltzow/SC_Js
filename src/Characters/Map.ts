@@ -1,6 +1,7 @@
 import Burst from './Burst'
 import Game from "../GameRule/Game";
 import _$ from "../Utils/gFrame";
+import Building from "./Building";
 
 var Map: any ={
     currentMap:'Switchback',//By default

@@ -10,6 +10,9 @@ import Burst from "../Characters/Burst";
 import Referee from "./Referee";
 import mouseController from "../Controller/mouseController";
 import Multiplayer from "./Multiplayer";
+import Terran from "../Characters/Terran";
+import Neutral from "../Characters/Neutral";
+import Hero from "../Characters/Hero";
 
 var Game: any ={
     //Global variables
@@ -1170,10 +1173,13 @@ var Game: any ={
         });
     },
     initIndexDB:function(){
-        window.indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
+        var webkitIndexedDB: any;
+        var mozIndexedDB: any;
+        var msIndexedDB:any;
+        (window as any).indexedDB=(indexedDB || webkitIndexedDB || mozIndexedDB || msIndexedDB);
         var connect=indexedDB.open('StarCraftHTML5',1);
         connect.onupgradeneeded=function(evt){
-            var db=evt.target.result;
+            var db=(evt.target as any).result;
             var objStore=db.createObjectStore('Replays',{keyPath:'id',autoIncrement:true});
             objStore.createIndex('levelIndex','level',{unique:false});
             objStore.createIndex('teamIndex','team',{unique:false});
@@ -1187,7 +1193,7 @@ var Game: any ={
     saveReplayIntoDB:function(){
         var connect=indexedDB.open('StarCraftHTML5',1);
         connect.onsuccess=function(evt){
-            var db=evt.target.result;
+            var db=(evt.target as any).result;
             var objStore=db.transaction(['Replays'],'readwrite').objectStore('Replays');
             objStore.add({
                 level:Game.level,

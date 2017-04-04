@@ -1,4 +1,6 @@
 //Alias
+import Burst from "./Burst";
+
 var Animation=Burst;
 Animation.getAllAnimations=function(){
     var allAnimes=[];
@@ -1060,3 +1062,5 @@ Animation.bloodD=Animation.extends({
         }
     }
 });
+
+export default Animation;

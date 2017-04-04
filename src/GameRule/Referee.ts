@@ -5,6 +5,7 @@ import Gobj from "../Characters/Gobj";
 import Map from "../Characters/Map";
 import Zerg from "../Characters/Zerg";
 import Protoss from "../Characters/Protoss";
+import Animation from "../Characters/Animation";
 var Referee: any={
     ourDetectedUnits:[],//Detected enemies
     enemyDetectedUnits:[],//Detected ours

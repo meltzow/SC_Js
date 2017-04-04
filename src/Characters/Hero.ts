@@ -1,6 +1,7 @@
 import Burst from "./Burst";
 import Gobj from "./Gobj";
 import Zerg from "./Zerg";
+import Unit, {AttackableUnit} from "./Units";
 /******* Define Hero units *******/
 var Hero: any={};
 Hero.HeroCruiser=AttackableUnit.extends({

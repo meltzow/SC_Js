@@ -6,6 +6,7 @@ import Terran from "../Characters/Terran";
 import Protoss from "../Characters/Protoss";
 import Hero from "../Characters/Hero";
 import Referee from "./Referee";
+import Cheat from "./Cheat";
 var Multiplayer: any ={
     ON:false,//by default
     webSocket:null,
@@ -13,7 +14,7 @@ var Multiplayer: any ={
     snapshotFlag:false,
     replaySnapshotFlag:true,
     getSocket:function(){
-        if (window.WebSocket) {
+        if ((window as any).WebSocket) {
             //ServerList: (1)HongKong:nvhae.com (3)Canada:104.128.82.12
             var webSocket=Multiplayer.webSocket=new WebSocket('ws://nvhae.com:28082');
             webSocket.onerror=function(){

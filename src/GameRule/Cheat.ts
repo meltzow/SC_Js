@@ -1,4 +1,11 @@
-var Cheat={
+import Referee from "./Referee";
+import Game from "./Game";
+import Hero from "../Characters/Hero";
+import Resource from "./Resource";
+import Multiplayer from "./Multiplayer";
+import Map from "../Characters/Map";
+
+var Cheat: any ={
     isShown:false,
     cwal:false,
     gathering:false,
@@ -143,3 +150,5 @@ var Cheat={
         return cheatFlag;
     }
 };
+
+export default Cheat;

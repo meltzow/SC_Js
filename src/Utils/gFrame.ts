@@ -75,18 +75,21 @@ var _$ : any =function(selector){
     return result;
 };
 
-String.prototype.contains=function(str){
+(String.prototype as any).contains=function(str){
     //return this.search(str)!=-1;
     return this.indexOf(str)!=-1;
 };
 
+var mozRequestAnimationFrame: any;
+var msRequestAnimationFrame: any;
+var oRequestAnimationFrame: any;
 window.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||
     mozRequestAnimationFrame || msRequestAnimationFrame || oRequestAnimationFrame;
 /*window.cancelRequestAnimationFrame=cancelRequestAnimationFrame || webkitCancelRequestAnimationFrame ||
     mozCancelRequestAnimationFrame || msCancelRequestAnimationFrame || oCancelRequestAnimationFrame;*/
 
 //Gobj is game object,initial by only one parameter props
-Function.prototype.extends=function(addInObject){
+(Function.prototype as any).extends=function(addInObject){
     //father call extends to produce child
     var father=this;
     //Create child self as constructor function
@@ -116,8 +119,8 @@ Function.prototype.extends=function(addInObject){
     //Behaviors including constructor are inherited by child, can find depreciated
     child.prototype.inherited=father.prototype;//Behavior always in prototype
     /*****Generate super&inherited pointer link*****/
-    child.super=father;
-    child.inherited=father.prototype;
+    (child as any).super=father;
+    (child as any).inherited=father.prototype;
     //Below is constructor link:
     //Mutalisk.constructor.(prototype.constructor).(prototype.constructor)
     return child;
@@ -150,7 +153,7 @@ _$.extends=function(fathers,addInObject){
     };
     if (fathers.length>0){
         var mixinProto=fathers[0].prototype;
-        for (N=1;N<fathers.length;N++){
+        for (var N=1;N<fathers.length;N++){
             //Mixin interfaces
             mixinProto=_$.delegate(mixinProto,fathers[N].prototype);
             //Still instanceof interface == false
@@ -210,7 +213,7 @@ _$.templates={
     src:{},
     //register ?id as ?tempStr
     register:function(id,tempStr){
-        var tempObj={};
+        var tempObj:any ={};
         tempObj.tempStr=tempStr;
         //Auto search for params
         tempObj.params=tempStr.match(/\${2}\w{1,}\${2}/g);// /RegExp/go,NoStop

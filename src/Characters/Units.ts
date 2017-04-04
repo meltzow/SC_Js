@@ -1,4 +1,10 @@
 //Define unit which has HP/direction and be selectable, unattackable unit
+import Gobj from "./Gobj";
+import Game from "../GameRule/Game";
+import _$ from "../Utils/gFrame";
+import Referee from "../GameRule/Referee";
+import Building from "./Building";
+
 var Unit=Gobj.extends({
     constructorPlus:function(props){
         //Add id for unit
@@ -928,6 +934,8 @@ var AttackableUnit=Unit.extends({
         }
     }
 });
+
+
 //Attack type
 AttackableUnit.NORMAL_ATTACK=0;
 AttackableUnit.BURST_ATTACK=1;
@@ -995,3 +1003,7 @@ AttackableUnit.hover=function(){
     };
     this.allFrames['dock']=dockFrame;
 };
+
+export {AttackableUnit};
+export default Unit;
+//export AttackableUnit;

@@ -1,4 +1,8 @@
-var keyController={
+import Cheat from "../GameRule/Cheat";
+import Game from "../GameRule/Game";
+import Map from "../Characters/Map";
+
+var keyController: any ={
 	shift:false,
     ctrl:false,
     disable:false,
@@ -106,3 +110,5 @@ var keyController={
         };
     }
 };
+
+export default keyController;

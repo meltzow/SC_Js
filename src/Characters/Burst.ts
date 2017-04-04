@@ -1,6 +1,7 @@
 import Gobj from './Gobj';
 import Game from "../GameRule/Game";
 import Map from "./Map";
+import Animation from "./Animation";
 
 
 //One animation period which only play for a while and die
