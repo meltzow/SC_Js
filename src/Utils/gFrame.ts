@@ -1,148 +1,91 @@
 //gFrame namespace: DOM selector function
-var _$ : any =function(selector){
-    var selectors=selector.trim().split(' ');
-    var result: any =document;//Overall
-    for (var N=0;N<selectors.length;N++){
-        var curSelector=selectors[N];
-        var filter,filterIndex=curSelector.indexOf('[');
-        if (filterIndex!=-1) {
-            filter=curSelector.substring(filterIndex+1,curSelector.indexOf(']')).trim();
-            curSelector=curSelector.substring(0,filterIndex);
-        }
-        if (curSelector.contains('#')) {
-            var id=curSelector.split('#')[1];
-            if (result.length) {
-                var _result=[];
-                for (var M=0;M<result.length;M++){
-                    _result.push(result[M].getElementById(id));
-                }
-                result=_result;
+export default class gFrame {
+
+    constructor(selector){
+        let selectors=selector.trim().split(' ');
+        let result:any=document;//Overall
+        for (let N=0;N<selectors.length;N++){
+            let curSelector=selectors[N];
+            let filter,filterIndex=curSelector.indexOf('[');
+            if (filterIndex!=-1) {
+                filter=curSelector.substring(filterIndex+1,curSelector.indexOf(']')).trim();
+                curSelector=curSelector.substring(0,filterIndex);
             }
-            else result=result.getElementById(id);
-        }
-        else {
-            var TagName=curSelector.contains('.')?curSelector.split('.')[0]:curSelector;
-            var className=curSelector.split('.')[1];
-            var tagResult, classResult;
-            if (TagName){
+            if (curSelector.contains('#')) {
+                let id=curSelector.split('#')[1];
                 if (result.length) {
-                    var _result=[];
-                    for (var M=0;M<result.length;M++){
-                        _result=_result.concat(_$.toArray(result[M].getElementsByTagName(TagName)));
+                    let _result=[];
+                    for (let M=0;M<result.length;M++){
+                        _result.push(result[M].getElementById(id));
                     }
-                    tagResult=_result;
+                    result=_result;
                 }
-                else tagResult=_$.toArray(result.getElementsByTagName(TagName));
+                else result=result.getElementById(id);
             }
-            if (className){
-                if (result.length) {
-                    var _result=[];
-                    for (var M=0;M<result.length;M++){
-                        _result=_result.concat(_$.toArray(result[M].getElementsByClassName(className)));
-                    }
-                    classResult=_result;
-                }
-                else classResult=_$.toArray(result.getElementsByClassName(className));
-            }
-            if (TagName && !className) result=tagResult;
-            if (!TagName && className) result=classResult;
-            if (TagName && className) {
-                //The intersection of tagResult and classResult
-                result=tagResult.filter(function(item){
-                    return (classResult.indexOf(item)!=-1);
-                });
-            }
-        }
-        //Apply filter
-        if (filter){
-            //Attribute value filter
-            if (filter.indexOf('=')!=-1){
-                var attr=filter.split('=')[0];
-                var val=eval(filter.split('=')[1]);
-                result=result.filter(function(item){
-                    return item.getAttribute(attr)==val;
-                });
-            }
-            //Has attribute filter
             else {
-                var attr=filter;
-                result=result.filter(function(item){
-                    return item.getAttribute(attr)!=null;
-                });
+                let TagName=curSelector.contains('.')?curSelector.split('.')[0]:curSelector;
+                let [className,tagResult=null,classResult = null]=[curSelector.split('.')[1]];
+                if (TagName){
+                    if (result.length) {
+                        let _result=[];
+                        for (let M=0;M<result.length;M++){
+                            _result=_result.concat(this.toArray(result[M].getElementsByTagName(TagName)));
+                        }
+                        tagResult=_result;
+                    }
+                    else tagResult=this.toArray(result.getElementsByTagName(TagName));
+                }
+                if (className){
+                    if (result.length) {
+                        let _result=[];
+                        for (let M=0;M<result.length;M++){
+                            _result=_result.concat(this.toArray(result[M].getElementsByClassName(className)));
+                        }
+                        classResult=_result;
+                    }
+                    else classResult=this.toArray(result.getElementsByClassName(className));
+                }
+                if (TagName && !className) result=tagResult;
+                if (!TagName && className) result=classResult;
+                if (TagName && className) {
+                    //The intersection of tagResult and classResult
+                    result=tagResult.filter(function(item){
+                        return (classResult.indexOf(item)!=-1);
+                    });
+                }
+            }
+            //Apply filter
+            if (filter){
+                //Attribute value filter
+                if (filter.indexOf('=')!=-1){
+                    let attr=filter.split('=')[0];
+                    let val=eval(filter.split('=')[1]);
+                    result=result.filter(function(item){
+                        return item.getAttribute(attr)==val;
+                    });
+                }
+                //Has attribute filter
+                else {
+                    let attr=filter;
+                    result=result.filter(function(item){
+                        return item.getAttribute(attr)!=null;
+                    });
+                }
             }
         }
-    }
-    return result;
-};
-
-(String.prototype as any).contains=function(str){
-    //return this.search(str)!=-1;
-    return this.indexOf(str)!=-1;
-};
-
-var mozRequestAnimationFrame: any;
-var msRequestAnimationFrame: any;
-var oRequestAnimationFrame: any;
-window.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||
-    mozRequestAnimationFrame || msRequestAnimationFrame || oRequestAnimationFrame;
-/*window.cancelRequestAnimationFrame=cancelRequestAnimationFrame || webkitCancelRequestAnimationFrame ||
-    mozCancelRequestAnimationFrame || msCancelRequestAnimationFrame || oCancelRequestAnimationFrame;*/
-
-//Gobj is game object,initial by only one parameter props
-(Function.prototype as any).extends=function(addInObject){
-    //father call extends to produce child
-    var father=this;
-    //Create child self as constructor function
-    var child=function(props){
-        //If props==null, will throw errors during construction
-        if (props){
-            //Execute old constructor
-            father.call(this,props);
-            //Add new into child constructor
-            addInObject.constructorPlus.call(this,props);//this.constructorPlus(props)
-        }
+        return result;
     };
-    //Inherit prototype from father, clear redundant properties inside father constructor
-    var fatherClean=function(){};
-    fatherClean.prototype=father.prototype;
-    child.prototype=new fatherClean();
-    child.prototype.constructor=child;
-    /*//We don't need properties constructed by {}, constructor not changed;
-    child.prototype.__proto__=father.prototype;//__proto__ isn't supported by IE9 and IE10, IE11 supports*/
-    //Add new functions into child.prototype
-    for (var attr in addInObject.prototypePlus){
-        child.prototype[attr]=addInObject.prototypePlus[attr];
-    }
-    /*****Add super&inherited pointer for instance*****/
-    //The upper constructor is super
-    child.prototype.super=father;
-    //Behaviors including constructor are inherited by child, can find depreciated
-    child.prototype.inherited=father.prototype;//Behavior always in prototype
-    /*****Generate super&inherited pointer link*****/
-    (child as any).super=father;
-    (child as any).inherited=father.prototype;
-    //Below is constructor link:
-    //Mutalisk.constructor.(prototype.constructor).(prototype.constructor)
-    return child;
-};
-
-//Extend Audio
-Audio.prototype.playFromStart=function(){
-    this.pause();
-    this.currentTime=0;
-    this.play();
-};
 
 /**************** Add to _$ namespace *******************/
 
-_$.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||
+    requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||
     mozRequestAnimationFrame || msRequestAnimationFrame || oRequestAnimationFrame;
 
-_$.extends=function(fathers,addInObject){
+    extends(fathers,addInObject){
     //Create child self as constructor function
-    var child=function(props){
+    let child=function(props){
         if (fathers instanceof Array){
-            var myself=this;
+            const myself=this;
             fathers.forEach(function(father){
                 father.call(myself,props);
             });
@@ -152,19 +95,19 @@ _$.extends=function(fathers,addInObject){
         else throw('_$.extends need array type parameter fathers!');
     };
     if (fathers.length>0){
-        var mixinProto=fathers[0].prototype;
+        let mixinProto=fathers[0].prototype;
         for (var N=1;N<fathers.length;N++){
             //Mixin interfaces
-            mixinProto=_$.delegate(mixinProto,fathers[N].prototype);
+            mixinProto=this.delegate(mixinProto,fathers[N].prototype);
             //Still instanceof interface == false
             mixinProto.constructor=fathers[N];
         }
-        child.prototype=_$.delegate(mixinProto,addInObject.prototypePlus);
+        child.prototype= this.delegate(mixinProto,addInObject.prototypePlus);
         child.prototype.constructor=child;
     }
     else {
         //Original method
-        for (var attr in addInObject.prototypePlus){
+        for (let attr in addInObject.prototypePlus){
             child.prototype[attr]=addInObject.prototypePlus[attr];
         }
     }
@@ -172,34 +115,31 @@ _$.extends=function(fathers,addInObject){
 };
 
 //_$.mixin == $.extend
-_$.mixin=function(){
-    switch (arguments.length){
+    mixin(...args){
+    switch (args.length){
         case 0:
             return {};
         default:
-            var dist=arguments[0];
-            for (var N=1;N<arguments.length;N++){
-                var addIn=arguments[N];
-                for (var attr in addIn){
-                    dist[attr]=addIn[attr];
-                }
-            }
+            let [dist,...addIns]=args;
+            addIns.forEach(addIn=>{
+                Object.assign(dist,addIn);
+            });
             return dist;
     }
 };
 //Can only copy one level, copy reference
-_$.copy=function(obj){
+    copy(obj){
     //Auto detect obj/array
-    return _$.mixin(new obj.constructor(),obj);
+    return this.mixin(new obj.constructor(),obj);
 };
 //Full traverse copy, copy one level when ref=true
-_$.clone=function(obj,ref){
+    clone(obj,ref?){
     //Auto detect obj/array
-    var dist=new obj.constructor();
-    for (var attr in obj){
+    let dist=new obj.constructor();
+    for (let attr in obj){
         //Cannot just assign pointer if it's object type
         if (typeof(obj[attr])=="object" && !ref) {
-            dist[attr]=_$.clone(obj[attr]);
+            dist[attr]=this.clone(obj[attr]);
         }
         //Can only assign simple type(number/boolean/string)
         else dist[attr]=obj[attr];
@@ -209,32 +149,32 @@ _$.clone=function(obj,ref){
 };
 
 //Template
-_$.templates={
-    src:{},
+    templates = {
+        src:{},
     //register ?id as ?tempStr
     register:function(id,tempStr){
-        var tempObj:any ={};
+        let tempObj: any={};
         tempObj.tempStr=tempStr;
         //Auto search for params
         tempObj.params=tempStr.match(/\${2}\w{1,}\${2}/g);// /RegExp/go,NoStop
-        _$.templates.src[id]=tempObj;
+        this.templates.src[id]=tempObj;
     },
     //apply template ?id with ?values
-    applyOn: function(id,values) {
-        var valueArray=[].concat(values);//Convert to array
-        var src=_$.templates.src[id];//Get src template object
-        var result=src.tempStr;//Get original template
-        for (var N=0;N<Math.min(valueArray.length,src.params.length);N++){
+    applyOn:function(id,values) {
+        let valueArray=[].concat(values);//Convert to array
+        let src=this.templates.src[id];//Get src template object
+        let result=src.tempStr;//Get original template
+        for (let N=0;N<Math.min(valueArray.length,src.params.length);N++){
             result=result.replace(src.params[N],valueArray[N]);
         }
         return result;
     }
 };
 
-_$.traverse=function(obj,func){
-    for (var attr in obj){
+    traverse(obj,func){
+    for (let attr in obj){
         if (typeof(obj[attr])=="object"){
-            _$.traverse(obj[attr],func);
+            this.traverse(obj[attr],func);
         }
         else {
             //Callback
@@ -243,10 +183,10 @@ _$.traverse=function(obj,func){
     }
 };
 
-_$.matrixOperation=function(matrix,operation){
-    for (var attr in matrix){
+    matrixOperation=function(matrix,operation){
+    for (let attr in matrix){
         if (typeof(matrix[attr])=="object"){//array or object
-            _$.matrixOperation(matrix[attr],operation);
+            this.matrixOperation(matrix[attr],operation);
         }
         else {
             matrix[attr]=operation(matrix[attr]);
@@ -255,8 +195,8 @@ _$.matrixOperation=function(matrix,operation){
 };
 
 //Map traverse for array
-_$.mapTraverse=function(array,operation){
-    var operationTraverse=function(n){
+    mapTraverse=function(array,operation){
+    let operationTraverse=function(n){
         if (n instanceof Array) return n.map(operationTraverse);
         else return operation(n);
     };
@@ -264,9 +204,9 @@ _$.mapTraverse=function(array,operation){
 };
 
 //Array equals array
-_$.arrayEqual=function(arr1,arr2){
+    arrayEqual=function(arr1,arr2){
     if (arr1.length==arr2.length){
-        for (var n=0;n<arr1.length;n++){
+        for (let n=0;n<arr1.length;n++){
             //Content not same
             if (arr1[n]!=arr2[n]) return false;
         }
@@ -277,156 +217,165 @@ _$.arrayEqual=function(arr1,arr2){
 };
 
 /**********Dojo relative**********/
-_$.modules={};
+    modules={};
 //Script loader
-_$.sourceLoader={
-    sources:{},
+    SourceLoader={
+    sources:new Map(),
     sourceNum:0,
     loadedNum:0,
     allLoaded:true,
     load:function(pathName){
-        _$.sourceLoader.sourceNum++;
-        _$.sourceLoader.allLoaded=false;
+        this.SourceLoader.sourceNum++;
+        this.SourceLoader.allLoaded=false;
         //Type=="script"
-        var node=document.createElement('script');
+        let node=document.createElement('script');
+        var that = this;
         node.onload=function(){
             //Load builder
-            _$.modules[pathName]=_$.define.loadedBuilders.shift();
-            _$.sourceLoader.loaded();
+            that.modules[pathName]=that.define.loadedBuilders.shift();
+            that.SourceLoader.loaded();
         };
         //Block this module, should not load again
-        _$.modules[pathName]=true;
+        this.modules[pathName]=true;
         node.src=pathName+'.js';
         document.getElementsByTagName('head')[0].appendChild(node);
     },
     loaded:function(){
-        _$.sourceLoader.loadedNum++;
-        if(_$.sourceLoader.loadedNum==_$.sourceLoader.sourceNum){
-            _$.sourceLoader.allLoaded=true;
+        this.SourceLoader.loadedNum++;
+        if(this.SourceLoader.loadedNum==this.SourceLoader.sourceNum){
+            this.SourceLoader.allLoaded=true;
         }
     },
-    allOnLoad:function(callback){
-        if (_$.sourceLoader.allLoaded) {
+    allOnLoad:function(callback=function(){}){
+        if (this.SourceLoader.allLoaded) {
             callback();
         }
         else {
             setTimeout(function(){
-                _$.sourceLoader.allOnLoad(callback);
+                this.SourceLoader.allOnLoad(callback);
             },100);
         }
     }
 };
 //Async instantiate
-_$.instModule=function(name){
-    //Add module instantiate stack
-    _$.instModule.refStack.push(name);
-    //Instantiate module constructor
-    var module=_$.modules[name];
-    //Now instantiate builder function
-    if (module._$isBuilder){
-        var refObjs=[];
-        if (module.refArr) {
-            module.refArr.forEach(function(ref){
-                //Recursion instantiate
-                if (ref[0]=='=') {
-                    //Closure
-                    var loc=ref.substr(1);
-                    refObjs.push(function(){
-                        return _$.modules[loc];
-                    });
-                }
-                else {
-                    if (_$.instModule.refStack.indexOf(ref)!=-1) {
-                        //Auto detect loop reference
-                        throw 'Loop reference found: '+name+' --> '+ref;
-                    }
-                    refObjs.push(_$.instModule(ref));
-                }
-            });
+    instModule=function(name){
+        if (this.instModule.refStack == null) {
+            this.instModule.refStack=[];
         }
-        //Override module function with instance
-        _$.modules[name]=module.apply(window,refObjs);
-    }
-    _$.instModule.refStack.pop();
-    return _$.modules[name];
+        //Add module instantiate stack
+        this.instModule.refStack.push(name);
+        //Instantiate module constructor
+        let module=this.modules[name];
+        //Now instantiate builder function
+        if (module._$isBuilder){
+            let refObjs=[];
+            if (module.refArr) {
+                module.refArr.forEach(function(ref){
+                    //Recursion instantiate
+                    if (ref[0]=='=') {
+                        //Closure
+                        let loc=ref.substr(1);
+                        refObjs.push(function(){
+                            return this.modules[loc];
+                        });
+                    }
+                    else {
+                        if (this.instModule.refStack.indexOf(ref)!=-1) {
+                            //Auto detect loop reference
+                            throw `Loop reference found: ${name} --> ${ref}`;
+                        }
+                        refObjs.push(this.instModule(ref));
+                    }
+                });
+            }
+            //Override module function with instance
+            this.modules[name]=module.apply(window,refObjs);
+        }
+        this.instModule.refStack.pop();
+        return this.modules[name];
 };
-_$.instModule.refStack=[];
+
 //Register module builder function into _$.modules
-_$.define=function(refArr,builderFunc){
-    refArr.forEach(function(ref){
-        if (ref[0]=='=') return;
-        //Recursion loading if that module not loaded
-        if (!_$.modules[ref]) _$.sourceLoader.load(ref);
-    });
-    //Builder loaded
-    builderFunc.refArr=refArr;
-    builderFunc._$isBuilder=true;
-    _$.define.loadedBuilders.push(builderFunc);
-    //_$.modules[pathName]=builderFunc;
-};
-_$.define.loadedBuilders=[];
+    define=function(refArr,builderFunc){
+
+        refArr.forEach(function(ref){
+            if (ref[0]=='=') return;
+            //Recursion loading if that module not loaded
+            if (!this.modules[ref]) this.SourceLoader.load(ref);
+        });
+        //Builder loaded
+        builderFunc.refArr=refArr;
+        builderFunc._$isBuilder=true;
+        if (this.define.loadedBuilders== null) {
+            this.define.loadedBuilders=[];
+        }
+        this.define.loadedBuilders.push(builderFunc);
+        //_$.modules[pathName]=builderFunc;
+    };
+
+
 //Run callback functions with module references
-_$.require=function(refArr,callback){
+    require=function(refArr,callback=()=>{}){
     refArr.forEach(function(ref){
         if (ref[0]=='=') return;
         //Recursion loading if that module not loaded
-        if (!_$.modules[ref]) _$.sourceLoader.load(ref);
+        if (!this.modules[ref]) this.SourceLoader.load(ref);
     });
-    _$.sourceLoader.allOnLoad(function(){
-        var refObjs=[];
+    this.SourceLoader.allOnLoad(function(){
+        let refObjs=[];
         refArr.forEach(function(ref){
             //Recursion instantiate
-            refObjs.push(_$.instModule(ref));
+            refObjs.push(this.instModule(ref));
         });
         callback.apply(window,refObjs);
     });
 };
 //Constructor extension: changed to multiple inherit
-_$.declare=function(globalName,fathers,plusObj){
+    declare=function(globalName,fathers,plusObj){
     if (arguments.length==2){
         plusObj=fathers;
         fathers=globalName;
         globalName=null;
     }
     if (!fathers) fathers=[];
-    var constructPlus=plusObj.constructor;
+    let constructPlus=plusObj.constructor;
     delete plusObj.constructor;
-    var protoPlus=plusObj;
-    var child=_$.extends(fathers,{constructorPlus:constructPlus,prototypePlus:protoPlus});
+    let protoPlus=plusObj;
+    let child=this.extends(fathers,{constructorPlus:constructPlus,prototypePlus:protoPlus});
     if (globalName) window[globalName]=child;
     return child;
 };
 
 //Publish & Subscribe topic
-_$.topic={};
-_$.subscribe=function(topic,callback){
-    if (!_$.topic[topic]) _$.topic[topic]={callbacks:[]};
-    _$.topic[topic].callbacks.push(callback);
+    topic={};
+    subscribe=function(topic,callback){
+    if (!this.topic[topic])this.topic[topic]={callbacks:[]};
+    this.topic[topic].callbacks.push(callback);
 };
 //Need add .owner on callback to identify who is subscriber
-_$.unSubscribe=function(topic,callback){
-    if (_$.topic[topic] && _$.topic[topic].callbacks){
-        var index=_$.topic[topic].callbacks.indexOf(callback);
-        _$.topic[topic].callbacks.splice(index,1);
+    unSubscribe=function(topic,callback){
+    if (this.topic[topic] && this.topic[topic].callbacks){
+        let index=this.topic[topic].callbacks.indexOf(callback);
+        this.topic[topic].callbacks.splice(index,1);
     }
 };
-_$.publish=function(topic,msgObj){
-    if (_$.topic[topic]){
-        _$.topic[topic].callbacks.forEach(function(callback){
+    publish=function(topic,msgObj){
+    if (this.topic[topic]){
+        this.topic[topic].callbacks.forEach(function(callback){
             callback.call(window,msgObj);
         })
     }
 };
 
 //lang.delegate:cover with one proto layer
-_$.delegate=function(chara,bufferObj){
-    var func=function(){};
+    delegate=function(chara,bufferObj){
+    let func=function(){};
     func.prototype=chara;
-    return _$.mixin(new func(),bufferObj);
+    return this.mixin(new func(),bufferObj);
 };
 
 //lang.hitch:bind context this with function
-_$.hitch=function(func,thisP){
+    hitch=function(func,thisP){
     //Higher-order function: compress this pointer into closure here
     return function() {
         func.apply(thisP,arguments);
@@ -434,21 +383,131 @@ _$.hitch=function(func,thisP){
 };
 
 //Convert array-like to real array
-_$.toArray=function(arr){
-    var result=[];
-    for (var N=0;N<arr.length;N++){
+    toArray=function(arr){
+    let result=[];
+    for (let N=0;N<arr.length;N++){
         result.push(arr[N]);
     }
     return result;
 };
 
-//To replace Math.hypot
-_$.hypot=function(vector){
-    var result=0;
-    vector.forEach(function(n){
-        result+=(n*n);
-    });
-    return Math.pow(result,0.5);
-};
+//Backup for name collision
+    Map=Map;
 
-export default _$;
+
+//Extension for ES6 class extends
+    protoProps= (Symbol as any).for("protoProps");
+    levelUpProps=(Symbol as any).for('levelUpProps');
+//Decorator: @classPatch
+    classPatch=function(targetClass){
+    if (targetClass[this.protoProps]){
+        Object.assign(targetClass.prototype,targetClass[this.protoProps]());
+        delete targetClass[this.protoProps];
+    }
+};
+//Decorator: @classPackagePatch
+    classPackagePatch=function(targetObj){
+    for (let charaType of Object.keys(targetObj)){
+        this.classPatch(targetObj[charaType]);
+    }
+};
+}
+
+
+
+(String.prototype as any).contains=function(str){
+    return this.indexOf(str)!=-1;
+};
+Object.defineProperty(String.prototype,'contains',{enumerable:false});
+
+let mozRequestAnimationFrame;
+let msRequestAnimationFrame;
+let oRequestAnimationFrame;
+window.requestAnimationFrame=requestAnimationFrame || webkitRequestAnimationFrame ||
+    mozRequestAnimationFrame || msRequestAnimationFrame || oRequestAnimationFrame;
+/*window.cancelRequestAnimationFrame=cancelRequestAnimationFrame || webkitCancelRequestAnimationFrame ||
+ mozCancelRequestAnimationFrame || msCancelRequestAnimationFrame || oCancelRequestAnimationFrame;*/
+
+//Gobj is game object,initial by only one parameter props
+(Function.prototype as any).extends=function(addInObject){
+    //father call extends to produce child
+    let father=this;
+    //Create child self as constructor function
+    let child : any =function(props){
+        //If props==null, will throw errors during construction
+        if (props){
+            //Execute old constructor
+            father.call(this,props);
+            //Add new into child constructor
+            addInObject.constructorPlus.call(this,props);//this.constructorPlus(props)
+        }
+    };
+    //Inherit prototype from father, clear redundant properties inside father constructor
+    /*//We don't need properties constructed by {}, constructor not changed;
+     child.prototype.__proto__=father.prototype;//__proto__ isn't supported by IE9 and IE10, IE11 supports*/
+    Object.setPrototypeOf(child.prototype,father.prototype);
+    //Add new functions into child.prototype
+    Object.assign(child.prototype,addInObject.prototypePlus);
+
+    /*****Add super&inherited pointer for instance*****/
+    //The upper constructor is super
+    child.prototype.super=father;
+    Object.defineProperty(child.prototype,'super',{enumerable:false});
+    //Behaviors including constructor are inherited by child, can find depreciated
+    child.prototype.inherited=father.prototype;//Behavior always in prototype
+    Object.defineProperty(child.prototype,'inherited',{enumerable:false});
+    /*****Generate super&inherited pointer link*****/
+    child.super=father;
+    Object.defineProperty(child,'super',{enumerable:false});
+    child.inherited=father.prototype;
+    Object.defineProperty(child,'inherited',{enumerable:false});
+
+    return child;
+};
+Object.defineProperty(Function.prototype,'extends',{enumerable:false});
+
+//Extend Audio
+Audio.prototype.playFromStart=function(){
+    this.pause();
+    this.currentTime=0;
+    this.play();
+};
+Object.defineProperty(Audio.prototype,'playFromStart',{enumerable:false});
+
+
+//Extend Array
+(Array as any).gen=function(N,start){
+    if (start==null) start=0;
+    let result=[];
+    for (let n=start;n<(N+1);n++){
+        result.push(n);
+    }
+    return result;
+};
+Object.defineProperty(Array,'gen',{enumerable:false});
+
+(Array.prototype as any ).repeat=function(N,flag){
+    let result=[];
+    if (flag){
+        for (let n=0;n<this.length;n++){
+            result=result.concat(new Array(N).fill(this[n]));
+        }
+    }
+    else {
+        for (let n=0;n<N;n++){
+            result=result.concat(this);
+        }
+    }
+    return result;
+};
+Object.defineProperty(Array.prototype,'repeat',{enumerable:false});
+(Array.prototype as any ).del=function(index,N){
+    this.splice(index,N);
+    return this;
+};
+Object.defineProperty(Array.prototype,'del',{enumerable:false});
+(Array.prototype as any ).insert=function(index,arr){
+    this.splice(index,0,...arr);
+    return this;
+};
+Object.defineProperty(Array.prototype,'insert',{enumerable:false});

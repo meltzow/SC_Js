@@ -13,7 +13,8 @@
     "pretty": true,
     "types": [
       "node",
-      "jasmine"
+      "jasmine",
+      "es6-shim"
     ]
   },
   "include": [
